@@ -3,8 +3,8 @@ import {fetchFromIPFS} from "../utils/ipfsClient.js";
 import {getDIDMetadata, getWalletDIDRelation} from "../utils/neo4jClient.js";
 
 describe("DID Creation Flow", () => {
-    const testWallet = "0x1234567890123456789012345678901234567890";
-    const testPublicKey = "5K1Xz8V2jVoGtrSRHvdp2rNvpFQy8JQFxA9rB3cD4eF6gH7iJ8k";
+    const testWallet = "1234567890abcdef";
+    const testPublicKey = "ABCD1234PUBLICKEY";
     let didID, cid;
 
     test("Create DID via GraphQL", async () => {
