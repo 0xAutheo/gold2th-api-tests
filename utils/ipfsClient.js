@@ -1,22 +1,22 @@
-let ipfs;
+import fetch from 'node-fetch';
 
-export async function fetchFromIPFS(cid) {
-    if (!ipfs) {
-        const {create} = await import("ipfs-http-client");
-        ipfs = create({url: "http://localhost:5001"});
-    }
+/**
+ * Fetch content from a local IPFS node via its HTTP gateway
+ * @param {string} cidStr - The CID to fetch
+ * @returns {Promise<string>} - The content as a string
+ */
+export async function fetchFromIPFS(cidStr) {
+    const gatewayUrl = `http://localhost:28081/ipfs/${cidStr}`;
 
     try {
-        const stream = ipfs.cat(cid);
-        const chunks = [];
-
-        for await (const chunk of stream) {
-            chunks.push(chunk);
+        const response = await fetch(gatewayUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
 
-        return Buffer.concat(chunks).toString();
+        return await response.text();
     } catch (error) {
-        console.error(`Failed to fetch IPFS content for CID: ${cid}`, error);
+        console.error(`Failed to fetch from IPFS at ${gatewayUrl}`, error);
         throw error;
     }
 }

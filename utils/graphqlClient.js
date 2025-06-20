@@ -29,3 +29,27 @@ export async function createDID(wallet, publicKey) {
     const variables = {wallet, publicKey};
     return await client.request(mutation, variables);
 }
+
+export async function resolveDID(did) {
+    const query = `
+        query ResolveDID($did: String!) {
+            resolveDID(did: $did) {
+                id
+                publicKey {
+                    id
+                    type
+                    controller
+                    publicKeyBase58
+                }
+                authentication
+                service {   
+                    id
+                    type
+                    serviceEndpoint
+                }
+            }
+        }
+    `;
+    const variables = {did};
+    return await client.request(query, variables);
+}
