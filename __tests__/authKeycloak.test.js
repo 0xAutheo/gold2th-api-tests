@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 
 describe("Authentication - Keycloak OIDC Discovery", () => {
-    const KEYCLOAK_URL = "http://localhost:8080"; // 🔁 Update if needed
+    const KEYCLOAK_URL = "http://localhost:9091"; // 🔁 Update if needed
 
     test("Authentication Flow - Keycloak OIDC Config is Accessible", async () => {
         const wellKnownUrl = `${KEYCLOAK_URL}/auth/realms/master/.well-known/openid-configuration`;

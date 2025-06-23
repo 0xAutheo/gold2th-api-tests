@@ -2,9 +2,9 @@ import {ethers} from "ethers";
 import neo4j from "neo4j-driver";
 
 describe("Consent Management - Smart Contract & Neo4j", () => {
-    const AUTHEO_TESTNET_CHAIN_ID = 785;
+    const AUTHEO_TESTNET_CHAIN_ID = 785n;
 
-    const testWallet = "0xa33874F8007F75B0F18f85928Bdf386a5B1915D7";
+    const testWallet = "0x150A959BbE87dE4da6C876b929638E97619106C3";
     const testPurpose = "data-processing";
     const testAuthorizedParty = "0x4567890123456789012345678901234567890123";
     const testScope = "personal-data";
@@ -12,12 +12,12 @@ describe("Consent Management - Smart Contract & Neo4j", () => {
     const testConsentTokenId = 12345;
 
     // Ethereum client setup
-    const provider = new ethers.JsonRpcProvider("http://localhost:8545"); // Update as needed
+    const provider = new ethers.JsonRpcProvider("https://testnet-rpc1.autheo.com"); // Update as needed
 
     // Neo4j setup
     const driver = neo4j.driver(
         "bolt://localhost:7687",
-        neo4j.auth.basic("neo4j", "test")
+        neo4j.auth.basic("neo4j", "password")
     );
 
     test("Grant Consent - Smart Contract Network Check", async () => {
