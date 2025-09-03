@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "posttest": "npx open-cli ./reports/test-report.html"
   },
   "dependencies": {
     "@helia/unixfs": "^5.0.3",
